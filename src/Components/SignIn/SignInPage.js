@@ -21,9 +21,9 @@ export default function SignInPage () {
     }
     return (
         <ContainerPage>
+            <h1>Bem vindo ao GratiBox</h1>   
             <Form onSubmit={signIn}>
                 <ContainerHeader>
-                <h1>Bem vindo ao GratiBox</h1>   
                 <Input
                     placeholder = "E-mail"
                     type = "email"
@@ -70,4 +70,5 @@ const ContainerButtons = styled.div`
     flex-direction: column;
     justify-content: start;
     background-color: #6D7CE4;
+    padding-top: 200px;
 `;
