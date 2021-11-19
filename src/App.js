@@ -10,7 +10,7 @@ function App() {
         <Switch>
           <Route path='/' component={Home} exact />
           <Route path='/sign-in' component={SignInPage} exact />
-          {/* <Route path='/sign-up' component={SignUpPage} exact /> */}
+          <Route path='/sign-up' component={SignUpPage} exact />
         </Switch>
         <GlobalStyle />
       </BrowserRouter>
