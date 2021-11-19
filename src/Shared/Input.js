@@ -8,16 +8,14 @@ const Input = styled.input`
     font-weight: 500;
     font-style: normal;
     font-size: 50px;
-    margin: 10px 0px;
-    
+    margin: 17px 0px;
+    padding-left: 25px;
     &::placeholder{
         color: #60484866;
-        padding-left: 7px;
         font-weight: 500;
         font-size: 50px;
     }
     &:focus{
-        padding-left: 7px;
         font-weight: 500;
         font-size: 50px;
     }
