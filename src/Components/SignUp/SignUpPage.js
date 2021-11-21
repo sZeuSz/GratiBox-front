@@ -61,7 +61,7 @@ export default function SignUpPage() {
                 />
             <ContainerButtons>
                 <ButtonSubmit type="submit">{isLoading ? LoadSpin : "Cadastrar"}</ButtonSubmit>
-                <ButtonRedirect disabled = {isLoading} onClick={() => history.push('sign-up/')}>Já sou grato</ButtonRedirect>
+                <ButtonRedirect disabled = {isLoading} onClick={() => history.push('/sign-in')}>Já sou grato</ButtonRedirect>
             </ContainerButtons>
             </Form>
         </ContainerMain>
