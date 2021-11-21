@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router";
+import UserContext from "../../Contexts/UserContext";
+import { postSignInRequest } from "../../Services/GratiBox";
 import { LoadSpin } from "../../Shared/Loadings";
 import { ButtonRedirect, ButtonSubmit, ContainerButtons, ContainerMain, Form, Input, Message1 } from "./SignInPageStyled";
 
@@ -7,6 +9,7 @@ export default function SignInPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { setUserData } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(false);
     
     const history = useHistory();
@@ -15,7 +18,20 @@ export default function SignInPage() {
 
         event.preventDefault();
         setIsLoading(true);
-    }
+
+        postSignInRequest({email, password})
+        .then((res) => {
+            setUserData(res.data);
+            setIsLoading(false);
+            history.push('/plans')
+            // setUserOnline(!userOnline);
+        })
+        .catch((erro) => {
+            setIsLoading(false);
+            alert(erro);
+        })
+    };
+    
     return (
         <ContainerMain>
             <Form onSubmit={signIn}>
