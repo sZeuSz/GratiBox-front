@@ -33,16 +33,18 @@ export default function SubscribePlanPageNext() {
     }
     
     function submitPlanSign(event) {
+        setUserOnline(!userOnline)
         event.preventDefault();
         setIsLoading(true)
-        setUserOnline(!userOnline)
         storePlanData( { plan: planData['plan'], address: { name, address, cep, city, state } })
         postPlanSignRequest(userData.token, { plan: planData['plan'], address: { name, address, cep, city, state } })
         .then((res) => {
             setIsLoading(false);
+            console.log(res)
             history.push('/details-plan')
         })
-        .catch((error) => {
+            .catch((error) => {
+            console.log(error)
             setIsLoading(false);
             removePlanData();
             removeUserData();
