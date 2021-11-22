@@ -29,6 +29,8 @@ export default function SignUpPage() {
                 history.push('/sign-in');
             })
             .catch((error) => {
+                alert("email in use");
+                setIsLoading(false);
             })
     }
     return (
