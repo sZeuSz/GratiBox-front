@@ -3,6 +3,7 @@ import UserContext from "../../Contexts/UserContext";
 import { ContainerMain } from '../SignUp/SignUpPageStyled';
 import { useHistory } from 'react-router';
 import { ButtonSubscribe, ContainerPlans, Description, Figure, ImagePlan, MessagePlan, Title } from './PlansPageStyled';
+import PageLoading from '../../Shared/Loadings';
 
 export default function PlansPage() {
     
@@ -15,6 +16,8 @@ export default function PlansPage() {
     }
 
     return (
+        <>
+        { !userData ? <PageLoading /> :
         <ContainerMain>
             <Title>Bom te ver por aqui, @{userData.name}.</Title>
             <MessagePlan>Você ainda não assinou um plano, que tal começar agora?</MessagePlan>
@@ -30,6 +33,8 @@ export default function PlansPage() {
                     <ButtonSubscribe onClick={() => history.push('/subscribe-plan')} >Subscribe</ButtonSubscribe>
                 </Figure>
             </ContainerPlans>
-        </ContainerMain>
+            </ContainerMain>
+        }
+        </>
     )
 }

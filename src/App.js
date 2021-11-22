@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import DetailsPlan from "./Components/DetailsPlan/DetailsPlan";
 import Home from "./Components/Home/Home";
 import PlansPage from "./Components/Plans/PlansPage";
 import SignInPage from "./Components/SignIn/SignInPage";
@@ -18,14 +19,14 @@ function App() {
   const localPlanData = getPlanData();
   const [userData, setUserData] = useState(localUserData);
   const [planData, setPlanData] = useState(localPlanData);
-  
+  const [userOnline, setUserOnline] = useState(false);
   useEffect(() => {
     setUserData(localUserData);
     setPlanData(localPlanData);
-  }, []);
+  }, [userOnline]);
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ userData, setUserData, userOnline, setUserOnline }}>
       <PlanContext.Provider value={{planData, setPlanData}}>
         <BrowserRouter>
             <Switch>
@@ -35,6 +36,7 @@ function App() {
               <Route path='/plans' component={PlansPage} exact />
               <Route path='/subscribe-plan' component={SubscribePlanPage} exact />
               <Route path='/subscribe-plan/next' component={SubscribePlanPageNext} exact />
+              <Route path='/details-plan' component={DetailsPlan} exact />
             </Switch>
             <GlobalStyle />
         </BrowserRouter>

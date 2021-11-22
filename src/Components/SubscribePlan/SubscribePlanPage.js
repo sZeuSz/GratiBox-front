@@ -6,8 +6,8 @@ import { useContext, useState } from "react";
 import { ButtonWhite } from "../Home/HomeStyled";
 import { useHistory } from "react-router";
 import UserContext from "../../Contexts/UserContext";
-import PlanContext from "../../Contexts/PlanContext";
 import { storePlanData } from "../../Services/Plan";
+import PageLoading from "../../Shared/Loadings";
 export default function SubscribePlanPage() {   
 
     const [isOpen, setIsOpen] = useState(false);
@@ -17,14 +17,11 @@ export default function SubscribePlanPage() {
     const [selectedDeliveryDay, setSelectedDeliveryDay] = useState(null);
     const [items, setItems] = useState('');
     const { userData } = useContext(UserContext);
-    const { setPlanData } = useContext(PlanContext);
     const history = useHistory();
 
     if (!userData) {
         history.push('/');
     }
-
-    console.log(userData);
     
     function onChangeValue(event) {
         if (event.target.value === 'Weekly' || event.target.value === 'Monthly') {
@@ -48,15 +45,11 @@ export default function SubscribePlanPage() {
     }
 
     function submitToNext() {
-        console.log(selectedPlan)
-        console.log(selectedDeliveryDay)
-        console.log(items)
         if (!selectedPlan || !selectedDeliveryDay || !items.length) {
             alert("por favor, preecha todos os campos");
             return;
         }
 
-        // console.log({ plan: { type: selectedPlan,  day: selectedDeliveryDay, items} })
         storePlanData({ plan: { type: selectedPlan, day: selectedDeliveryDay, items } })
         
         history.push('/subscribe-plan/next');
@@ -64,51 +57,53 @@ export default function SubscribePlanPage() {
 
     return (
         <>
-        <ContainerMainP>
-            <Title>Bom te ver por aqui @{userData.name}.</Title>
-            <MessagePlan>"Agradecer é arte de atrair coisas boas"</MessagePlan>
-            <p></p>
-            <ContainerSign>
-                <Figure>
-                    <ImageSignPlan src="https://s3-alpha-sig.figma.com/img/0252/513e/5b6008e549096b70ec7d6254ebb06abc?Expires=1638144000&Signature=Zjyk59fo0ZPmZvT9oyDoccxe-2xAmERjf9ggdRsZU122I1gyAokOt7wol2tYVWUB-ftDhxPGiGkxgQlzbo61X9EG~Oi3k4pEHHK4WBmTaqhQDib51~H70Tx8sqSKjT-1r0GBHJ8GYCkx8nFljHC0Jg1zSNaTZna1lerFJt68SeTet8JBnWrjzAPUUqx2WKpx4H3n2LzZo4ZblrNuBjnw-MAO~V~zSven2Z2ql76f2NkNbsh1SL-gLwKLS1N3BpdVPVwH6GR1M4VKQgrkRcBprfAwA2MxDojgLg8qBzgEYfKjSdwGnY~zlo2vhpk7xxlH2qmyyL1SnY6i40GNqpGONQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" />
-                </Figure>
-                <InputDiv >
-                    <Name>Plano</Name> 
-                    <IconRow open={isOpen} onClick={() => { console.log(isOpen); setIsOpen(!isOpen) }}/>
-                </InputDiv>
+            {!userData ? <PageLoading /> :
+                <ContainerMainP>
+                    <Title>Bom te ver por aqui @{userData.name}.</Title>
+                    <MessagePlan>"Agradecer é arte de atrair coisas boas"</MessagePlan>
+                    <p></p>
+                    <ContainerSign>
+                        <Figure>
+                            <ImageSignPlan src="https://s3-alpha-sig.figma.com/img/0252/513e/5b6008e549096b70ec7d6254ebb06abc?Expires=1638144000&Signature=Zjyk59fo0ZPmZvT9oyDoccxe-2xAmERjf9ggdRsZU122I1gyAokOt7wol2tYVWUB-ftDhxPGiGkxgQlzbo61X9EG~Oi3k4pEHHK4WBmTaqhQDib51~H70Tx8sqSKjT-1r0GBHJ8GYCkx8nFljHC0Jg1zSNaTZna1lerFJt68SeTet8JBnWrjzAPUUqx2WKpx4H3n2LzZo4ZblrNuBjnw-MAO~V~zSven2Z2ql76f2NkNbsh1SL-gLwKLS1N3BpdVPVwH6GR1M4VKQgrkRcBprfAwA2MxDojgLg8qBzgEYfKjSdwGnY~zlo2vhpk7xxlH2qmyyL1SnY6i40GNqpGONQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" />
+                        </Figure>
+                        <InputDiv >
+                            <Name>Plano</Name>
+                            <IconRow open={isOpen} onClick={() => { console.log(isOpen); setIsOpen(!isOpen) }} />
+                        </InputDiv>
                 
-                <Plans open={isOpen} onChange={onChangeValue}>
-                    <ContainerTwo><Plan type="radio" value="Weekly" name="selectedPlan" /> Weekly</ContainerTwo>
-                    <ContainerTwo><Plan type="radio" value="Monthly" name="selectedPlan" /> Monthly</ContainerTwo>
-                </Plans>
-                <InputDiv>
-                    <Name>Entrega</Name> 
-                    <IconRow open={isOpenTwo} onClick={() => { console.log(isOpenTwo); setIsOpenTwo(!isOpenTwo) }}/>
-                </InputDiv>
-                {selectedPlan && selectedPlan === 'Monthly' ?
-                    <Plans open={isOpenTwo}  onChange={onChangeValue}>
-                        <ContainerTwo><Plan type="radio" value="Dia 01" name="selectedDeliveryDay" /> Dia 01</ContainerTwo>
-                        <ContainerTwo><Plan type="radio" value="Dia 10" name="selectedDeliveryDay" /> Dia 10</ContainerTwo>
-                        <ContainerTwo><Plan type="radio" value="Dia 20" name="selectedDeliveryDay" /> Dia 20</ContainerTwo>
-                    </Plans> : <Plans open={isOpenTwo} onChange={onChangeValue}>
-                        <ContainerTwo><Plan type="radio" value="Monday" name="selectedDeliveryDay" /> Monday</ContainerTwo>
-                        <ContainerTwo><Plan type="radio" value="Wednesday" name="selectedDeliveryDay" /> Wednesday</ContainerTwo>
-                        <ContainerTwo><Plan type="radio" value="Friday" name="selectedDeliveryDay" /> Friday</ContainerTwo>
-                    </Plans>
-                }
-                <InputDiv>
-                    <Name>Quero receber</Name> 
-                    <IconRow open={isOpenThree} onClick={() => { console.log(isOpenThree); setIsOpenThree(!isOpenThree) }}/>
-                </InputDiv>
+                        <Plans open={isOpen} onChange={onChangeValue}>
+                            <ContainerTwo><Plan type="radio" value="Weekly" name="selectedPlan" /> Weekly</ContainerTwo>
+                            <ContainerTwo><Plan type="radio" value="Monthly" name="selectedPlan" /> Monthly</ContainerTwo>
+                        </Plans>
+                        <InputDiv>
+                            <Name>Entrega</Name>
+                            <IconRow open={isOpenTwo} onClick={() => { console.log(isOpenTwo); setIsOpenTwo(!isOpenTwo) }} />
+                        </InputDiv>
+                        {selectedPlan && selectedPlan === 'Monthly' ?
+                            <Plans open={isOpenTwo} onChange={onChangeValue}>
+                                <ContainerTwo><Plan type="radio" value="Dia 01" name="selectedDeliveryDay" /> Dia 01</ContainerTwo>
+                                <ContainerTwo><Plan type="radio" value="Dia 10" name="selectedDeliveryDay" /> Dia 10</ContainerTwo>
+                                <ContainerTwo><Plan type="radio" value="Dia 20" name="selectedDeliveryDay" /> Dia 20</ContainerTwo>
+                            </Plans> : <Plans open={isOpenTwo} onChange={onChangeValue}>
+                                <ContainerTwo><Plan type="radio" value="Monday" name="selectedDeliveryDay" /> Monday</ContainerTwo>
+                                <ContainerTwo><Plan type="radio" value="Wednesday" name="selectedDeliveryDay" /> Wednesday</ContainerTwo>
+                                <ContainerTwo><Plan type="radio" value="Friday" name="selectedDeliveryDay" /> Friday</ContainerTwo>
+                            </Plans>
+                        }
+                        <InputDiv>
+                            <Name>Quero receber</Name>
+                            <IconRow open={isOpenThree} onClick={() => { console.log(isOpenThree); setIsOpenThree(!isOpenThree) }} />
+                        </InputDiv>
 
-                <Plans open={isOpenThree} onChange={onChangeValue}>
-                    <ContainerTwo><Plan type="checkbox" value="Chás" name="items" onChange={onChangeItems}/> Chás</ContainerTwo>
-                    <ContainerTwo><Plan type="checkbox" value="Incensos" name="items" onChange={onChangeItems} /> Incensos</ContainerTwo>
-                    <ContainerTwo><Plan type="checkbox" value="Produtos organicos" name="items" onChange={onChangeItems} /> Produtos organicos</ContainerTwo>
-                </Plans>                
-            </ContainerSign>
-            <ButtonNext onClick={()=> submitToNext()}>Next</ButtonNext>
-            </ContainerMainP>
+                        <Plans open={isOpenThree} onChange={onChangeValue}>
+                            <ContainerTwo><Plan type="checkbox" value="Chás" name="items" onChange={onChangeItems} /> Chás</ContainerTwo>
+                            <ContainerTwo><Plan type="checkbox" value="Incensos" name="items" onChange={onChangeItems} /> Incensos</ContainerTwo>
+                            <ContainerTwo><Plan type="checkbox" value="Produtos organicos" name="items" onChange={onChangeItems} /> Produtos organicos</ContainerTwo>
+                        </Plans>
+                    </ContainerSign>
+                    <ButtonNext onClick={() => submitToNext()}>Next</ButtonNext>
+                </ContainerMainP>
+            }
             </>
     )
 }
