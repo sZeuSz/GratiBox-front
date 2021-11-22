@@ -57,7 +57,8 @@ export default function SubscribePlanPage() {
         }
 
         // console.log({ plan: { type: selectedPlan,  day: selectedDeliveryDay, items} })
-        storePlanData({ plan: { type: selectedPlan,  day: selectedDeliveryDay, items} })
+        storePlanData({ plan: { type: selectedPlan, day: selectedDeliveryDay, items } })
+        
         history.push('/subscribe-plan/next');
     }
 

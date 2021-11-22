@@ -15,7 +15,7 @@ export default function SubscribePlanPageNext() {
 
     
     const { userData } = useContext(UserContext);
-    const { setPlanData } = useContext(PlanContext);
+    const {planData, setPlanData } = useContext(PlanContext);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [cep, setCep] = useState('');
@@ -29,9 +29,18 @@ export default function SubscribePlanPageNext() {
         history.push('/');
     }
 
-    console.log(userData);
+    console.log("aquii", userData);
+    console.log("aquii",planData);
     
-    function submitToNext() {
+    function submitPlan(event) {
+        event.preventDefault();
+        console.log(planData)
+        console.log(name);
+        console.log(address);
+        console.log(cep);
+        console.log(city);
+        console.log(state);
+        storePlanData({plan: planData['planData']['plan'] ,  address: { name, address, cep, city, state } })
         return;
     }
 
@@ -45,7 +54,7 @@ export default function SubscribePlanPageNext() {
                     <Figure>
                         <ImageSignPlan src="https://s3-alpha-sig.figma.com/img/0252/513e/5b6008e549096b70ec7d6254ebb06abc?Expires=1638144000&Signature=Zjyk59fo0ZPmZvT9oyDoccxe-2xAmERjf9ggdRsZU122I1gyAokOt7wol2tYVWUB-ftDhxPGiGkxgQlzbo61X9EG~Oi3k4pEHHK4WBmTaqhQDib51~H70Tx8sqSKjT-1r0GBHJ8GYCkx8nFljHC0Jg1zSNaTZna1lerFJt68SeTet8JBnWrjzAPUUqx2WKpx4H3n2LzZo4ZblrNuBjnw-MAO~V~zSven2Z2ql76f2NkNbsh1SL-gLwKLS1N3BpdVPVwH6GR1M4VKQgrkRcBprfAwA2MxDojgLg8qBzgEYfKjSdwGnY~zlo2vhpk7xxlH2qmyyL1SnY6i40GNqpGONQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" />
                     </Figure>
-                    <Form>
+                    <Form onSubmit={submitPlan}>
                         <Input
                             placeholder="Full name"
                             type="name"

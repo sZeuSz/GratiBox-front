@@ -18,6 +18,7 @@ function App() {
   const localPlanData = getPlanData();
   const [userData, setUserData] = useState(localUserData);
   const [planData, setPlanData] = useState(localPlanData);
+  
   useEffect(() => {
     setUserData(localUserData);
     setPlanData(localPlanData);
