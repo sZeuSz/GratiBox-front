@@ -49,6 +49,3 @@ function getDates(k, day, date) {
     
     return Array(k).fill().map((_, index) => addDays(new_day, index * 7).toLocaleDateString() )
 }
-
-// today is 05/19/2020
-// console.log(getDates(3, "monday", date)) // output: [05/25/2020]

@@ -68,7 +68,7 @@ export default function SubscribePlanPage() {
                         </Figure>
                         <InputDiv >
                             <Name>Plano</Name>
-                            <IconRow open={isOpen} onClick={() => { console.log(isOpen); setIsOpen(!isOpen) }} />
+                            <IconRow open={isOpen} onClick={() => { setIsOpen(!isOpen) }} />
                         </InputDiv>
                 
                         <Plans open={isOpen} onChange={onChangeValue}>
@@ -77,7 +77,7 @@ export default function SubscribePlanPage() {
                         </Plans>
                         <InputDiv>
                             <Name>Entrega</Name>
-                            <IconRow open={isOpenTwo} onClick={() => { console.log(isOpenTwo); setIsOpenTwo(!isOpenTwo) }} />
+                            <IconRow open={isOpenTwo} onClick={() => { setIsOpenTwo(!isOpenTwo) }} />
                         </InputDiv>
                         {selectedPlan && selectedPlan === 'Monthly' ?
                             <Plans open={isOpenTwo} onChange={onChangeValue}>
@@ -92,7 +92,7 @@ export default function SubscribePlanPage() {
                         }
                         <InputDiv>
                             <Name>Quero receber</Name>
-                            <IconRow open={isOpenThree} onClick={() => { console.log(isOpenThree); setIsOpenThree(!isOpenThree) }} />
+                            <IconRow open={isOpenThree} onClick={() => {setIsOpenThree(!isOpenThree) }} />
                         </InputDiv>
 
                         <Plans open={isOpenThree} onChange={onChangeValue}>

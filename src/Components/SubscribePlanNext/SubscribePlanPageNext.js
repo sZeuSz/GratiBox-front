@@ -1,7 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled  from "styled-components";
 import { MessagePlan, Title } from '../Plans/PlansPageStyled'
 import { ContainerMain } from '../SignUp/SignUpPageStyled';
-import {AiOutlineArrowDown} from 'react-icons/ai'
 import { useContext, useState } from "react";
 import { ButtonWhite } from "../Home/HomeStyled";
 import { useHistory } from "react-router";
@@ -18,7 +17,7 @@ export default function SubscribePlanPageNext() {
 
     
     const { userData, userOnline, setUserOnline} = useContext(UserContext);
-    const {planData, setPlanData} = useContext(PlanContext);
+    const {planData} = useContext(PlanContext);
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [cep, setCep] = useState('');
@@ -40,11 +39,9 @@ export default function SubscribePlanPageNext() {
         postPlanSignRequest(userData.token, { plan: planData['plan'], address: { name, address, cep, city, state } })
         .then((res) => {
             setIsLoading(false);
-            console.log(res)
             history.push('/details-plan')
         })
             .catch((error) => {
-            console.log(error)
             setIsLoading(false);
             removePlanData();
             removeUserData();
@@ -188,24 +185,6 @@ const ContainerMainP = styled(ContainerMain)`
     width: auto;
 
 `;
-
-const aumentar = keyframes`
-    0%{
-        height: 0px;
-    }
-    100%{
-        height: 50px;
-    }
-`;
-const diminuir = keyframes`
-    100%{
-        height: 0px;
-    }
-    0%{
-        height: 50px;
-    }
-`;
-
 const ContainerSign = styled.div`
     display:flex;
     flex-direction: column;
@@ -238,71 +217,6 @@ const ImageSignPlan = styled.img`
     @media(max-width: 824px){
         object-fit: contain;
     }
-`;
-
-const InputDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    height: 50px;
-    font-weight: 700;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color: #E0D1ED9E;
-    margin: 0 auto;
-    color: #4D65A8;
-`;
-
-const IconRow = styled(AiOutlineArrowDown)`
-    width: 25px;
-    height: 25px;
-    margin-right: 25px;
-    transform: rotateX(${({open}) => open ? '180deg' : '0deg'});
-`;
-
-const Name = styled.h1`
-    margin-left: 25px;
-`;
-
-const Plans = styled.div`
-    height:  ${({open}) => open ? '50px' : '0px'};
-    width: 90%;
-    margin: 0px auto 30px auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: #E0D1ED9E;
-    animation: ${({ open }) => open ? aumentar : diminuir} ${({ open }) => open ? '0.3s' : '0.1s'};
-    overflow: hidden;
-
-    input[type='radio'] {
-        box-sizing: border-box;
-        appearance: none;
-        background: white;
-        outline: 2px solid #333;
-        border: 3px solid white;
-        width: 12px;
-        height: 12px;
-    }
-
-    input[type='radio']:checked {
-    background: #333;
-    }
-
-    @media(max-width: 400px) {
-        flex-wrap:wrap;
-    }
-`;
-
-const ContainerTwo = styled.div`
-    margin: 0px 28px;
-`;
-
-const Plan = styled.input`
-    margin: 0px 0px;
 `;
 
 const ButtonNext = styled(ButtonWhite)`

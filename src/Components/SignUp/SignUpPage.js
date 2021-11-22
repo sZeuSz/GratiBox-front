@@ -20,18 +20,15 @@ export default function SignUpPage() {
         setIsLoading(true);
 
         if (password !== confirmPassword) {
-            console.error('password match incorrect');
             setIsLoading(false);
             return;
         }
 
         postSignUpRequest({ name, email, password, confirmPassword })
             .then((res) => {
-                console.log(res.data);
                 history.push('/sign-in');
             })
             .catch((error) => {
-                console.error(error.response);
             })
     }
     return (
@@ -53,7 +50,7 @@ export default function SignUpPage() {
                 value = {email}
                 onChange = { e => setEmail(e.target.value)}
                 disabled = {isLoading}
-                pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
+                pattern = "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
                 required                 
                 />
             <Input

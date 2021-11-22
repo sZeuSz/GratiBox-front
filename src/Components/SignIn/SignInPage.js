@@ -44,7 +44,7 @@ export default function SignInPage() {
                 value = {email}
                 onChange = { e => setEmail(e.target.value)}
                 disabled = {isLoading}
-                pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
+                pattern = "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
                 required                 
                 />
             <Input
