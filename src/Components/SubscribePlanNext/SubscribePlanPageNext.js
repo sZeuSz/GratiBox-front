@@ -40,7 +40,7 @@ export default function SubscribePlanPageNext() {
         postPlanSignRequest(userData.token, { plan: planData['plan'], address: { name, address, cep, city, state } })
         .then((res) => {
             setIsLoading(false);
-            history.push('/details-subscribe')
+            history.push('/details-plan')
         })
         .catch((error) => {
             setIsLoading(false);
