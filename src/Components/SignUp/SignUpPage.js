@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import styled from "styled-components";
 import { postSignUpRequest } from "../../Services/GratiBox";
 import { LoadSpin } from "../../Shared/Loadings";
-import { Button2rd, ButtonWhite, Message } from "../Home/HomeStyled";
 import { ButtonRedirect, ButtonSubmit, ContainerButtons, ContainerMain, Form, Input, Message1 } from "./SignUpPageStyled";
 
 export default function SignUpPage() {
@@ -22,18 +20,17 @@ export default function SignUpPage() {
         setIsLoading(true);
 
         if (password !== confirmPassword) {
-            console.error('password match incorrect');
             setIsLoading(false);
             return;
         }
 
         postSignUpRequest({ name, email, password, confirmPassword })
             .then((res) => {
-                console.log(res.data);
                 history.push('/sign-in');
             })
             .catch((error) => {
-                console.error(error.response);
+                alert("email in use");
+                setIsLoading(false);
             })
     }
     return (
@@ -55,7 +52,7 @@ export default function SignUpPage() {
                 value = {email}
                 onChange = { e => setEmail(e.target.value)}
                 disabled = {isLoading}
-                pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
+                pattern = "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$"
                 required                 
                 />
             <Input
