@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
-import styled from "styled-components";
 import { postSignUpRequest } from "../../Services/GratiBox";
 import { LoadSpin } from "../../Shared/Loadings";
-import { Button2rd, ButtonWhite, Message } from "../Home/HomeStyled";
 import { ButtonRedirect, ButtonSubmit, ContainerButtons, ContainerMain, Form, Input, Message1 } from "./SignUpPageStyled";
 
 export default function SignUpPage() {

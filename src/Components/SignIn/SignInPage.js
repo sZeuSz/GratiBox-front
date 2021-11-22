@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useHistory } from "react-router";
 import UserContext from "../../Contexts/UserContext";
 import { postSignInRequest } from "../../Services/GratiBox";
+import { storeUserDAta } from "../../Services/Login";
 import { LoadSpin } from "../../Shared/Loadings";
 import { ButtonRedirect, ButtonSubmit, ContainerButtons, ContainerMain, Form, Input, Message1 } from "./SignInPageStyled";
 
@@ -23,6 +24,7 @@ export default function SignInPage() {
         .then((res) => {
             setUserData(res.data);
             setIsLoading(false);
+            storeUserDAta(res.data)
             history.push('/plans')
             // setUserOnline(!userOnline);
         })

@@ -21,7 +21,7 @@ export const Header = styled.header`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 82%;
+    width: 33%;
     height: 10%;
     justify-content: flex-start;
     padding-right: 50%;
@@ -30,6 +30,7 @@ export const Header = styled.header`
     @media(max-width: 834px){
         padding-right: 0;
         height: auto;
+        width: 82%;
     }
 `;
 
